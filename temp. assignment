@@ -1,0 +1,61 @@
+def celsius_to_kelvin(celsius):
+    """
+    Mengkonversi suhu dari Celsius ke Kelvin.
+    """
+    return celsius + 273.15
+
+def kelvin_to_celsius(kelvin):
+    """
+    Mengkonversi suhu dari Kelvin ke Celsius.
+    """
+    return kelvin - 273.15
+
+def temperature_to_fahrenheit(temperature, unit):
+    """
+    Mengkonversi suhu dari Celsius atau Kelvin ke Fahrenheit.
+    Panggil fungsi celsius_to_kelvin jika unit adalah Celsius.
+    """
+    if unit.lower() == 'celsius':
+        kelvin_temperature = celsius_to_kelvin(temperature)
+    elif unit.lower() == 'kelvin':
+        kelvin_temperature = temperature
+    else:
+        raise ValueError("Unit harus 'celsius' atau 'kelvin'.")
+
+    fahrenheit_temperature = (kelvin_temperature - 273.15) * 9/5 + 32
+    return fahrenheit_temperature
+
+def fahrenheit_to_temperature(fahrenheit, output_unit):
+    """
+    Mengkonversi suhu dari Fahrenheit ke Celsius atau Kelvin.
+    """
+    celsius_temperature = (fahrenheit - 32) * 5/9
+
+    if output_unit.lower() == 'celsius':
+        return celsius_temperature
+    elif output_unit.lower() == 'kelvin':
+        return celsius_to_kelvin(celsius_temperature)
+    else:
+        raise ValueError("Unit harus 'celsius' atau 'kelvin'.")
+
+# Contoh penggunaan:
+# 1. Konversi suhu dari Celsius ke Kelvin dan sebaliknya
+celsius_value = 40
+kelvin_value = celsius_to_kelvin(celsius_value)
+print(f"{celsius_value} derajat Celsius setara dengan {kelvin_value} Kelvin.")
+
+kelvin_value = 310
+celsius_value = kelvin_to_celsius(kelvin_value)
+print(f"{kelvin_value} Kelvin setara dengan {celsius_value} derajat Celsius.")
+
+# 2. Konversi suhu ke Fahrenheit
+temperature_value = 90
+input_unit = 'celsius'
+fahrenheit_result = temperature_to_fahrenheit(temperature_value, input_unit)
+print(f"{temperature_value} derajat {input_unit.capitalize()} setara dengan {fahrenheit_result:.2f} Fahrenheit.")
+
+# 3. Konversi suhu dari Fahrenheit
+fahrenheit_value = 200
+output_unit = 'kelvin'
+result = fahrenheit_to_temperature(fahrenheit_value, output_unit)
+print(f"{fahrenheit_value} Fahrenheit setara dengan {result:.2f} {output_unit.capitalize()}.")
